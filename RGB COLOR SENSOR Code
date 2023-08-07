@@ -1,0 +1,26 @@
+// Inclure la bibliothèque pour le RGB Sensor 
+#include <Adafruit_TCS34725.h>
+
+// Initialiser le capteur 
+Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
+
+void setup() {
+  Serial.begin(9600); // Initialiser la communication série pour le débogage
+  tcs.begin(); // Initialiser le capteur de couleur
+}
+
+void loop() {
+  // Lire les valeurs RGB du capteur
+  uint16_t r, g, b, c;
+  tcs.getRawData(&r, &g, &b, &c); //les valeurs RGB sont lues en utilisant tcs.getRawData(&r, &g, &b, &c), puis elles sont affichées sur le moniteur série.
+  
+  // Afficher les valeurs RVB sur le moniteur série
+  Serial.print("R: "); Serial.print(r);
+  Serial.print(" G: "); Serial.print(g);
+  Serial.print(" B: "); Serial.print(b);
+  Serial.println();
+  
+  delay(1000); // Attendre 1 seconde avant la prochaine détection
+}
+//Le RGB Sensor mesure les niveaux de lumière rouge (R), verte (G) et bleue (B) pour déterminer la couleur de l'objet.
+//L'objet Adafruit_TCS34725 est créé avec les paramètres TCS34725_INTEGRATIONTIME_50MS et TCS34725_GAIN_4X pour configurer le capteur.
