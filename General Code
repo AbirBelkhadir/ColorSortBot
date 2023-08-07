@@ -1,0 +1,36 @@
+
+// Définit les broches de base pour le servo driver
+#define SERVOMIN 150  // Angle minimum pour le servo (calibration)
+#define SERVOMAX 600  // Angle maximum pour le servo (calibration)
+
+// Définit le nombre de servos que nous avons
+#define NUM_SERVOS 6
+
+void setup() {
+  // Démarre la communication avec le servo driver
+  pwm.begin();
+  
+  // Configure la fréquence PWM pour les servos (idéalement entre 40 et 1000 Hz)
+  pwm.setPWMFreq(60);
+}
+
+void loop() {
+  // Fait bouger les servos d'une position à une autre
+  moveServo(1, 0);  // la fonction moveServo Fait bouger le servo 1 à l'angle 0 degré
+  delay(1000);  // Attends 1 seconde
+  
+  moveServo(1, 180);  // Fait bouger le servo 1 à l'angle 180 degrés
+  delay(1000);  // Attends 1 seconde
+}
+
+void moveServo(uint8_t servoIndex, uint16_t angle) // Définit la fonction moveServo pour bouger un servo à un angle donné.
+ {
+  if (servoIndex < NUM_SERVOS) // Vérifie si l'index du servo est valide.
+   {
+    // Convertit l'angle en une valeur PWM appropriée en utilisant la fonction map
+    uint16_t pulseWidth = map(angle, 0, 180, SERVOMIN, SERVOMAX);
+    
+    // Envoie le signal PWM au servo pour le faire bouger
+    pwm.setPWM(servoIndex, 0, pulseWidth);
+  }
+}
