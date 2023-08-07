@@ -1,0 +1,25 @@
+// Inclure la bibliothèque pour l'IR Sensor
+#include <NewPing.h>
+
+// Définir les broches pour le capteur (en fonction de câblage)
+#define IR_PIN 2
+
+// Créer une instance de l'objet NewPing
+NewPing irSensor(IR_PIN, IR_PIN, 200);
+
+void setup() {
+  Serial.begin(9600); // Initialiser la communication série pour le débogage
+}
+
+void loop() {
+  // Mesurer la distance avec l'IR Sensor
+  int distance = irSensor.ping_cm();
+
+  // Vérifier si un objet est détecté à proximité (distance inférieure à 20 cm)
+  if (distance < 20) {
+    Serial.println("Objet détecté !");
+  } else {
+    Serial.println("Pas d'objet détecté.");
+  }
+  
+  delay(1000); // Attendre 1 seconde avant la prochaine mesure
