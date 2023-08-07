@@ -1,0 +1,27 @@
+// Inclure la bibliothèque pour l'Ultrasonic Sensor
+#include <NewPing.h>
+
+// Définir les broches pour le capteur 
+#define TRIGGER_PIN 12
+#define ECHO_PIN 11
+
+// Créer une instance de l'objet NewPing
+NewPing ultrasonicSensor(TRIGGER_PIN, ECHO_PIN, 200);
+
+void setup() {
+  Serial.begin(9600); // Initialiser la communication série pour le débogage
+}
+
+void loop() {
+  // Mesurer la distance avec l'Ultrasonic Sensor
+  int distance = ultrasonicSensor.ping_cm(); // la distance est mesurée en utilisant ultrasonicSensor.ping_cm(). La distance est ensuite affichée sur le moniteur série.
+
+  // Afficher la distance mesurée sur le moniteur série
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  
+  delay(1000); // Attendre 1 seconde avant la prochaine mesure
+}
+//L'Ultrasonic Sensor utilise une paire de broches, une pour la détection (TRIGGER) et une pour la réception (ECHO). Le capteur émet un signal ultrasonique et mesure le temps qu'il faut pour que le signal revienne après avoir rencontré un objet.
+//L'objet NewPing est créé avec les broches TRIGGER_PIN et ECHO_PIN pour utiliser le capteur.
