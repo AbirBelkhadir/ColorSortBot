@@ -1,7 +1,7 @@
 // Inclure la bibliothèque pour l'IR Sensor
 #include <NewPing.h>
 
-// Définir les broches pour le capteur (en fonction de câblage)
+// Définir les broches pour le capteur 
 #define IR_PIN 2
 
 // Créer une instance de l'objet NewPing
@@ -23,3 +23,4 @@ void loop() {
   }
   
   delay(1000); // Attendre 1 seconde avant la prochaine mesure
+}
